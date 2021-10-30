@@ -1,5 +1,6 @@
 import 'package:coolicons/coolicons.dart';
 import 'package:flutter/material.dart';
+import 'package:task_manager_app/src/data/fake_today_task.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -90,9 +91,54 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: 48,
+                    height: 36,
                     child: Container(
-                      color: Colors.blue,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 32),
+                            child: const Center(
+                              child: Text(
+                                'Today',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 32),
+                            child: const Center(
+                              child: Text(
+                                'Upcoming',
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 32),
+                            child: const Center(
+                              child: Text(
+                                'Task Done',
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -103,14 +149,63 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Expanded(
                     child: ListView.builder(
-                        itemCount: 8,
+                        itemCount: fakeTodayTask.length,
                         itemBuilder: (context, index) {
                           return Padding(
                             padding: const EdgeInsets.symmetric(vertical: 8),
                             child: Container(
                               height: 180,
-                              decoration:
-                                  const BoxDecoration(color: Colors.yellow),
+                              decoration: BoxDecoration(
+                                color: fakeTodayTask[index].backgroundColorRGB,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              padding: const EdgeInsets.all(12),
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    height: 28,
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: ListView.builder(
+                                              scrollDirection: Axis.horizontal,
+                                              itemCount: fakeTodayTask[index]
+                                                  .tags
+                                                  ?.length,
+                                              itemBuilder: (context, idx2) {
+                                                String _tag =
+                                                    fakeTodayTask[index]
+                                                            .tags?[idx2] ??
+                                                        '';
+                                                return Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 12),
+                                                  child: Container(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 12,
+                                                        vertical: 4),
+                                                    decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color:
+                                                              Colors.black45),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              24),
+                                                    ),
+                                                    child: Center(
+                                                      child: Text(_tag),
+                                                    ),
+                                                  ),
+                                                );
+                                              }),
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           );
                         }),
