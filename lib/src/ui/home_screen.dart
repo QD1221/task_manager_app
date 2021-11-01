@@ -1,5 +1,7 @@
 import 'package:coolicons/coolicons.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:task_manager_app/src/controller/tab_controller.dart';
 import 'package:task_manager_app/src/data/fake_today_task.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,6 +13,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int? _tabIndex = 0;
+  final taskTabController = Get.put(TaskTabController());
 
   @override
   Widget build(BuildContext context) {
@@ -99,6 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         GestureDetector(
                           onTap: () {
+                            taskTabController.setTabIndex(0);
                             setState(() {
                               _tabIndex = 0;
                             });
@@ -126,6 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(width: 8),
                         GestureDetector(
                           onTap: () {
+                            taskTabController.setTabIndex(1);
                             setState(() {
                               _tabIndex = 1;
                             });
@@ -153,6 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(width: 8),
                         GestureDetector(
                           onTap: () {
+                            taskTabController.setTabIndex(2);
                             setState(() {
                               _tabIndex = 2;
                             });
